@@ -120,6 +120,7 @@ def save_prediction_image(stacked_img, im_name, epoch, save_folder_name="result_
     # Save Image!
     export_name = str(im_name) + '.png'
     img_cont.save(desired_path + export_name)
+    print("save path:" + desired_path + export_name)
     return img_cont_np
 
 
