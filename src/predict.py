@@ -34,7 +34,7 @@ if __name__ == "__main__":
         torch.utils.data.DataLoader(dataset=SEM_test,
                                     num_workers=3, batch_size=1, shuffle=False)
 
-   # Test
-   print("generate test prediction")
-   test_model("../test/latest.pwf",
+    # Test
+    print("generate test prediction")
+    test_model("../test/latest.pwf",
               SEM_test_load, 0, "../test/")
