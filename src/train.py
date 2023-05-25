@@ -7,9 +7,15 @@ import numpy as np
 from PIL import Image
 from modules import *
 from save_history import *
+import sys
 
 
 if __name__ == "__main__":
+
+    args = sys.argv
+
+
+
     # Dataset begin
     SEM_train = SEMDataTrain(
         '../data/train/images', '../data/train/masks')
@@ -49,7 +55,7 @@ if __name__ == "__main__":
 
     # Parameters
     epoch_start = 0
-    epoch_end = 2000
+    epoch_end = int(args[1]) # 推奨 2000
 
     # Saving History to csv
     header = ['epoch', 'train loss', 'train acc', 'val loss', 'val acc']
