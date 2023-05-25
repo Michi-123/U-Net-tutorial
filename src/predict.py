@@ -10,6 +10,7 @@ from save_history import *
 
 
 if __name__ == "__main__":
+   
     # Dataset begin
     SEM_train = SEMDataTrain(
         '../data/train/images', '../data/train/masks')
@@ -32,14 +33,6 @@ if __name__ == "__main__":
     SEM_test_load = \
         torch.utils.data.DataLoader(dataset=SEM_test,
                                     num_workers=3, batch_size=1, shuffle=False)
-
-    # Dataloader end
-
-    # Model
-    model = torch.load(model_path)
-    model = torch.nn.DataParallel(model, device_ids=list(
-        range(torch.cuda.device_count()))).cuda()
-        
 
 # Test
 print("generate test prediction")
