@@ -44,4 +44,4 @@ if __name__ == "__main__":
 # Test
 print("generate test prediction")
 test_model("../history/latest.pwf",
-           SEM_test_load, 120, "../history/")
+           SEM_test_load, 0, "../test/")
