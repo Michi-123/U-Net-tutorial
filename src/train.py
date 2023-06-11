@@ -11,10 +11,7 @@ import sys
 
 
 if __name__ == "__main__":
-
     args = sys.argv
-
-
 
     # Dataset begin
     SEM_train = SEMDataTrain(
@@ -56,7 +53,14 @@ if __name__ == "__main__":
     # Parameters
     epoch_start = 0
     epoch_end = int(args[1]) # 推奨 2000
-
+    
+    if epoch_end < 10:
+        save_frequency = 1
+    elif epoch_end < 100:
+        save_frequency = 10
+    else:
+        save_frequency = 100
+    
     # Saving History to csv
     header = ['epoch', 'train loss', 'train acc', 'val loss', 'val acc']
     save_file_name = "../history/RMS/history_RMS3.csv"
@@ -84,7 +88,7 @@ if __name__ == "__main__":
             values = [i+1, train_loss, train_acc, val_loss, val_acc]
             export_history(header, values, save_dir, save_file_name)
 
-            if (i+1) % 100 == 0:  # save model every 10 epoch
+            if (i+1) % save_frequency == 0:  # save model every 10 epoch
                 save_models(model, model_save_dir, i+1)
 
 """
