@@ -5,7 +5,7 @@ import torch.nn as nn
 from torch.autograd import Variable
 import numpy as np
 from PIL import Image
-from modules import *
+from modules import train_model, get_loss_train, validate_model, test_model, save_prediction_image, polarize
 from save_history import *
 import sys
 
