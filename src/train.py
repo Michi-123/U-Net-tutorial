@@ -80,8 +80,8 @@ if __name__ == "__main__":
         #train_loss = train_loss / len(SEM_train)
         print('Epoch', str(i+1), 'Train loss:', train_loss, "Train acc", train_acc)
 
-        # Validation every 5 epoch
-        if (i+1) % 5 == 0:
+        # Validation every 5 epoch (Error code)
+        if False:
             val_acc, val_loss = validate_model(
                 model, SEM_val_load, criterion, i+1, True, image_save_path)
             print('Val loss:', val_loss, "val acc:", val_acc)
