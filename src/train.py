@@ -27,14 +27,14 @@ if __name__ == "__main__":
     # Dataloader begins
     SEM_train_load = \
         torch.utils.data.DataLoader(dataset=SEM_train,
-                                    num_workers=16, batch_size=2, shuffle=True)
+                                    num_workers=2, batch_size=2, shuffle=True) # ワーカー数をColab用に設定
     SEM_val_load = \
         torch.utils.data.DataLoader(dataset=SEM_val,
-                                    num_workers=3, batch_size=1, shuffle=True)
+                                    num_workers=2, batch_size=2, shuffle=True)
 
     SEM_test_load = \
         torch.utils.data.DataLoader(dataset=SEM_test,
-                                    num_workers=3, batch_size=1, shuffle=False)
+                                    num_workers=2, batch_size=1, shuffle=False)
 
     # Dataloader end
 
@@ -88,8 +88,10 @@ if __name__ == "__main__":
             values = [i+1, train_loss, train_acc, val_loss, val_acc]
             export_history(header, values, save_dir, save_file_name)
 
-            if (i+1) % save_frequency == 0:  # save model every 10 epoch
-                save_models(model, model_save_dir, i+1)
+        # save model every save frequency epoch
+        if (i+1) % save_frequency == 0:
+            print('Saved.')
+            save_models(model, model_save_dir, i+1)
 
 """
 # Test
