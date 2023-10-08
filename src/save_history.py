@@ -41,6 +41,8 @@ def save_models(model, path, epoch):
     """
     if not os.path.exists(path):
         os.makedirs(path)
-    torch.save(model, path+"/model_epoch_{0}.pwf".format(epoch))
-    torch.save(model, "../test/latest.pwf")
+    # torch.save(model, path+"/model_epoch_{0}.pwf".format(epoch))
+    # torch.save(model, "../test/latest.pwf")
+    torch.save(model.state_dict(), path+"/model_epoch_{0}.pwf".format(epoch))
+    torch.save(model.state_dict(), "../test/latest.pwf")
     
