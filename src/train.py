@@ -15,7 +15,7 @@ if __name__ == "__main__":
     call(args[1])
     pass
     
-def call(num_epochs, model_path=None):
+def run(num_epochs, model_path=None):
 
     # Dataset begin
     SEM_train = SEMDataTrain(
