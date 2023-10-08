@@ -10,31 +10,20 @@ from save_history import *
 
 
 if __name__ == "__main__":
+   pass
+
+def run(img_path, model_path):
+
+   # '../data/test/images/'
+   SEM_test = SEMDataTest(img_path)
    
-    # Dataset begin
-    SEM_train = SEMDataTrain(
-        '../data/train/images', '../data/train/masks')
+   SEM_test_load = \
+     torch.utils.data.DataLoader(dataset=SEM_test,
+                                 num_workers=3, batch_size=1, shuffle=False)
+   
+   # Test
+   print("generate test prediction")
 
-    # TO DO: finish test data loading
-    SEM_test = SEMDataTest(
-        '../data/test/images/')
-    SEM_val = SEMDataVal(
-        '../data/val/images', '../data/val/masks')
-    # Dataset end
-
-    # Dataloader begins
-    SEM_train_load = \
-        torch.utils.data.DataLoader(dataset=SEM_train,
-                                    num_workers=16, batch_size=2, shuffle=True)
-    SEM_val_load = \
-        torch.utils.data.DataLoader(dataset=SEM_val,
-                                    num_workers=3, batch_size=1, shuffle=True)
-
-    SEM_test_load = \
-        torch.utils.data.DataLoader(dataset=SEM_test,
-                                    num_workers=3, batch_size=1, shuffle=False)
-
-    # Test
-    print("generate test prediction")
-    test_model("../test/latest.pwf",
-              SEM_test_load, 0, "../test/")
+   # "../test/latest.pwf"
+   test_model(model_path, SEM_test_load, 0, "../test/")
+   test_model(model_path, SEM_test_load, 0, "../result/")
