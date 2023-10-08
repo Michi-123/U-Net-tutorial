@@ -85,7 +85,8 @@ def test_model(model_path, data_test, epoch, save_folder_name='prediction'):
     """
     device = torch.device('cuda')
     model = UNet()
-    model.load_state_dict(torch.load(model_path, map_location=device))
+    # model.load_state_dict(torch.load(model_path, map_location=device))
+    model.load_state_dict(torch.load(model_path))
     model = torch.nn.DataParallel(model, device_ids=list(
         range(torch.cuda.device_count()))).cuda()
     model.eval()
