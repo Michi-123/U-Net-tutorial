@@ -170,7 +170,21 @@ def test_SEM(model, data_test,  folder_to_save):
     return final_img
 """
 
+def get_prediction_image(image_src_path, image_mask_path):
+    # @title 画像表示
 
+    # 入力画像
+    image_src = Image.open(image_src_path)
+    # 出力画像（マスク）
+    image_mask = Image.open(image_mask_path)
+
+    dst = Image.new('RGB', (image_src.width * 2, image_src.height ))
+    dst.paste(image_src, (0, 0))
+    dst.paste(image_mask, (image_src.width, 0 ))
+
+    # 画像を表示
+    return dst
+    
 if __name__ == '__main__':
     SEM_train = SEMDataTrain(
         '../data/train/images', '../data/train/masks')
