@@ -86,7 +86,7 @@ def extract_img(size, in_tensor):
 
 
 class CleanU_Net(nn.Module):
-    def __init__(self, in_channels, out_channels):
+    def __init__(self, in_channels=1, out_channels=2):
         super(CleanU_Net, self).__init__()
         self.Conv_down1 = Conv_down(in_channels, 64)
         self.Conv_down2 = Conv_down(64, 128)
