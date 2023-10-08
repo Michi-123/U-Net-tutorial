@@ -85,9 +85,9 @@ def extract_img(size, in_tensor):
     return in_tensor
 
 
-class CleanU_Net(nn.Module):
+class UNet(nn.Module):
     def __init__(self, in_channels=1, out_channels=2):
-        super(CleanU_Net, self).__init__()
+        super(UNet, self).__init__()
         self.Conv_down1 = Conv_down(in_channels, 64)
         self.Conv_down2 = Conv_down(64, 128)
         self.Conv_down3 = Conv_down(128, 256)
@@ -148,7 +148,7 @@ class CleanU_Net(nn.Module):
 if __name__ == "__main__":
     # A full forward pass
     im = torch.randn(1, 1, 572, 572)
-    model = CleanU_Net(1, 2)
+    model = UNet(1, 2)
     x = model(im)
     print(x.shape)
     del model
