@@ -44,6 +44,13 @@ if __name__ == "__main__":
     model = torch.nn.DataParallel(model, device_ids=list(
         range(torch.cuda.device_count()))).cuda()
 
+    if len(args) > 2:
+        print('Load model')
+        model_path = args[2]
+        model = torch.load(model_path)
+        pass
+
+
     # Loss function
     criterion = nn.CrossEntropyLoss()
 
@@ -81,7 +88,7 @@ if __name__ == "__main__":
         print('Epoch', str(i+1), 'Train loss:', train_loss, "Train acc", train_acc)
 
         # Validation every 5 epoch (Error code)
-        if False:
+        if (i+1) % 5 == 0:
             val_acc, val_loss = validate_model(
                 model, SEM_val_load, criterion, i+1, True, image_save_path)
             print('Val loss:', val_loss, "val acc:", val_acc)
