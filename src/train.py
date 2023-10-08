@@ -106,3 +106,9 @@ print("generate test prediction")
 test_model("../history/RMS/saved_models/model_epoch_440.pwf",
            SEM_test_load, 440, "../history/RMS/result_images_test")
 """
+
+def debug():
+    for batch, (images_v, masks_v, original_msk) in enumerate(SEM_val):
+        print('batch', batch)
+        print('images_v', images_v.shape)
+        Image.fromarray(np.uint8(images_v[0].numpy().reshape(572,572)*255))
