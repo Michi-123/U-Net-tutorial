@@ -8,7 +8,7 @@ import torch.nn as nn
 from accuracy import accuracy_check, accuracy_check_for_batch
 import csv
 import os
-
+from network import UNet
 
 def train_model(model, data_train, criterion, optimizer):
     """Train the model and report validation error with training error
@@ -83,7 +83,8 @@ def test_model(model_path, data_test, epoch, save_folder_name='prediction'):
     """
         Test run
     """
-    model = torch.load(model_path)
+    model = UNet()
+    model.load_state_dict(torch.load(model_path))
     model = torch.nn.DataParallel(model, device_ids=list(
         range(torch.cuda.device_count()))).cuda()
     model.eval()
