@@ -12,6 +12,10 @@ import sys
 
 if __name__ == "__main__":
     args = sys.argv
+    call(args[1])
+    pass
+    
+def call(num_epochs, model_path=None):
 
     # Dataset begin
     SEM_train = SEMDataTrain(
@@ -44,12 +48,9 @@ if __name__ == "__main__":
     model = torch.nn.DataParallel(model, device_ids=list(
         range(torch.cuda.device_count()))).cuda()
 
-    if len(args) > 2:
+    if model_path != None:
         print('Load model')
-        model_path = args[2]
         model = torch.load(model_path)
-        pass
-
 
     # Loss function
     criterion = nn.CrossEntropyLoss()
@@ -59,7 +60,7 @@ if __name__ == "__main__":
 
     # Parameters
     epoch_start = 0
-    epoch_end = int(args[1]) # 推奨 2000
+    epoch_end = num_epochs # 推奨 2000
     
     if epoch_end < 10:
         save_frequency = 1
