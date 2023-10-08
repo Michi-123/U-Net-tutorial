@@ -45,12 +45,13 @@ def run(num_epochs, model_path=None):
     # Model
     model = CleanU_Net(in_channels=1, out_channels=2)
     #model = CleanU_Net()
-    model = torch.nn.DataParallel(model, device_ids=list(
-        range(torch.cuda.device_count()))).cuda()
 
     if model_path != None:
         print('Load model')
         model = torch.load(model_path)
+    
+    model = torch.nn.DataParallel(model, device_ids=list(
+        range(torch.cuda.device_count()))).cuda()
 
     # Loss function
     criterion = nn.CrossEntropyLoss()
