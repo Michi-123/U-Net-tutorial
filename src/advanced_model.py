@@ -99,6 +99,7 @@ class CleanU_Net(nn.Module):
         self.Conv_up4 = Conv_up(128, 64)
         self.Conv_out = nn.Conv2d(64, out_channels, 1, padding=0, stride=1)
         #self.Conv_final = nn.Conv2d(out_channels, out_channels, 1, padding=0, stride=1)
+        self.apply(self._init_weights)
 
     def forward(self, x):
 
@@ -124,6 +125,25 @@ class CleanU_Net(nn.Module):
 
         return x
 
+    def _init_weights(self, module):
+
+        if isinstance(module, nn.Linear):
+            module.weight.data.normal_(mean=0.0, std=1.0)
+            if module.bias is not None:
+                module.bias.data.zero_()
+
+        elif isinstance(module, (nn.Conv2d, nn.ConvTranspose2d, nn.BatchNorm2d)):
+            nn.init.kaiming_normal_(module.weight, mode="fan_out", nonlinearity="relu")
+            if module.bias is not None:
+                nn.init.constant_(module.bias, 0)
+
+        elif isinstance(module, nn.Embedding):
+            module.weight.data.normal_(mean=0.0, std=1.0)
+            if module.padding_idx is not None:
+                module.weight.data[module.padding_idx].zero_()
+        elif isinstance(module, nn.LayerNorm):
+            module.bias.data.zero_()
+            module.weight.data.fill_(1.0)
 
 if __name__ == "__main__":
     # A full forward pass
@@ -134,3 +154,4 @@ if __name__ == "__main__":
     del model
     del x
     # print(x.shape)
+
