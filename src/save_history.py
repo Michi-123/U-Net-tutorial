@@ -43,6 +43,16 @@ def save_models(model, path, epoch):
         os.makedirs(path)
     # torch.save(model, path+"/model_epoch_{0}.pwf".format(epoch))
     # torch.save(model, "../test/latest.pwf")
-    torch.save(model.state_dict(), path+"/model_epoch_{0}.pwf".format(epoch))
-    torch.save(model.state_dict(), "../test/latest.pwf")
+
+    path = path + "/model_epoch_{0}.pwf".format(epoch)
     
+    torch.save({
+            'model_state_dict': model.state_dict(),
+            # 'optimizer_state_dict': optimizer.state_dict(),
+            }, path)
+
+    path = "../test/latest.pwf"
+    torch.save(
+            'model_state_dict': model.state_dict(),
+            # 'optimizer_state_dict': optimizer.state_dict(),
+            }, path)
