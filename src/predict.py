@@ -25,5 +25,4 @@ def run(img_path, model_path):
    print("generate test prediction")
 
    # "../test/latest.pwf"
-   test_model(model_path, SEM_test_load, 0, "../test/")
    test_model(model_path, SEM_test_load, 0, "../result/")
