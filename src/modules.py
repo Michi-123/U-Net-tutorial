@@ -130,7 +130,7 @@ def save_prediction_image(stacked_img, im_name, epoch, save_folder_name="result_
     #     epoch_path = '/epoch_' + str(epoch) + '/'
     # else:
     #     epoch_path = '/predict_img/'
-    epoch_path = ''
+    epoch_path = '/'
 
     desired_path = save_folder_name + epoch_path
     # Create the path if it does not exist
