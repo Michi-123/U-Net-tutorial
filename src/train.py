@@ -64,7 +64,7 @@ def run(model, num_epochs):
     
     # Saving History to csv
     header = ['epoch', 'train loss', 'train acc', 'val loss', 'val acc']
-    save_file_name = "../history/RMS/history_RMS3.csv"
+    save_file_name = "../history/history.csv"
     save_dir = "../history"
 
     # Saving images and models directories
