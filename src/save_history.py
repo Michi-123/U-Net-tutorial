@@ -48,7 +48,7 @@ def save_models(model, path, epoch):
     #         'model_state_dict': model.state_dict(),
     #         # 'optimizer_state_dict': optimizer.state_dict(),
     #         }, path)
-    path = "../test/latest.pwf"
+    path = "../history/latest.pwf"
     torch.save(model, path)
     # torch.save({
     #         'model_state_dict': model.state_dict(),
