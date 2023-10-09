@@ -65,11 +65,11 @@ def run(model, num_epochs):
     # Saving History to csv
     header = ['epoch', 'train loss', 'train acc', 'val loss', 'val acc']
     save_file_name = "../history/RMS/history_RMS3.csv"
-    save_dir = "../history/RMS"
+    save_dir = "../history"
 
     # Saving images and models directories
-    model_save_dir = "../history/RMS/saved_models3"
-    image_save_path = "../history/RMS/result_images3"
+    model_save_dir = "../history/saved_models"
+    image_save_path = "../history/result_images"
 
     # Train
     print("Initializing Training!")
