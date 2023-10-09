@@ -68,6 +68,7 @@ def validate_model(model, data_val, criterion, epoch, make_prediction=True, save
             with torch.no_grad():
                 image_v = Variable(images_v[:, index, :, :].unsqueeze(0).cuda())
                 mask_v = Variable(masks_v[:, index, :, :].squeeze(1).cuda())
+                output_v = model(image_v)
                 # print(image_v.shape, mask_v.shape)
                 if b == 0: 
                     print('image_v', image_v.shape, mask_v.shape)
@@ -75,7 +76,6 @@ def validate_model(model, data_val, criterion, epoch, make_prediction=True, save
                     print('output_v', output_v.shape)
                     print()
                     b = 1
-                output_v = model(image_v)
                 total_val_loss = total_val_loss + criterion(output_v, mask_v).cpu().item()
                 # print('out', output_v.shape)
                 output_v = torch.argmax(output_v, dim=1).float()
