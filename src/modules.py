@@ -21,6 +21,7 @@ def train_model(model, data_train, criterion, optimizer):
     for batch, (images, masks) in enumerate(data_train):
         images = Variable(images.cuda())
         masks = Variable(masks.cuda())
+        print('train images', images.shape)
         outputs = model(images)
         # print(masks.shape, outputs.shape)
         loss = criterion(outputs, masks)
@@ -52,6 +53,35 @@ def get_loss_train(model, data_train, criterion):
 
 
 def validate_model(model, data_val, criterion, epoch, make_prediction=True, save_folder_name='prediction'):
+    """
+        Validation run
+    """
+    # calculating validation loss
+    total_val_loss = 0
+    total_val_acc = 0
+    for batch, (images_v, masks_v, original_msk) in enumerate(data_val):
+        stacked_img = torch.Tensor([]).cuda()
+        for index in range(images_v.size()[1]):
+            with torch.no_grad():
+                image_v = Variable(images_v[:, index, :, :].unsqueeze(0).cuda())
+                mask_v = Variable(masks_v[:, index, :, :].squeeze(1).cuda())
+                # print(image_v.shape, mask_v.shape)
+                print('val image_v', image_v.shape)
+                output_v = model(image_v)
+                total_val_loss = total_val_loss + criterion(output_v, mask_v).cpu().item()
+                # print('out', output_v.shape)
+                output_v = torch.argmax(output_v, dim=1).float()
+                stacked_img = torch.cat((stacked_img, output_v))
+        if make_prediction:
+            im_name = batch  # TODO: Change this to real image name so we know
+            pred_msk = save_prediction_image(stacked_img, im_name, epoch, save_folder_name)
+            acc_val = accuracy_check(original_msk, pred_msk)
+            total_val_acc = total_val_acc + acc_val
+
+    return total_val_acc/(batch + 1), total_val_loss/((batch + 1)*4)
+
+
+def validate_model_old(model, data_val, criterion, epoch, make_prediction=True, save_folder_name='prediction'):
     """
         Validation run
     """
