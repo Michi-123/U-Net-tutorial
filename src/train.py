@@ -31,14 +31,14 @@ def run(model, num_epochs):
     # Dataloader begins
     SEM_train_load = \
         torch.utils.data.DataLoader(dataset=SEM_train,
-                                    num_workers=2, batch_size=2, shuffle=True) # ワーカー数をColab用に設定
+                                    num_workers=1, batch_size=2, shuffle=True) # ワーカー数をColab用に設定
     SEM_val_load = \
         torch.utils.data.DataLoader(dataset=SEM_val,
-                                    num_workers=2, batch_size=1, shuffle=True)
+                                    num_workers=1, batch_size=1, shuffle=True)
 
     SEM_test_load = \
         torch.utils.data.DataLoader(dataset=SEM_test,
-                                    num_workers=2, batch_size=1, shuffle=False)
+                                    num_workers=1, batch_size=1, shuffle=False)
 
     # Dataloader end
     
