@@ -175,7 +175,8 @@ class SEMDataVal(Dataset):
             # Convert normalized array into tensor
             processed_list.append(img_to_add)
 
-        img_as_tensor = torch.Tensor(processed_list)
+        processed_array = np.array(processed_list)
+        img_as_tensor = torch.Tensor(processed_array)
         #  return tensor of 4 cropped images
         #  top left, top right, bottom left, bottom right respectively.
 
