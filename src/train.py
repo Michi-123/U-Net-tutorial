@@ -82,7 +82,7 @@ def run(model, num_epochs):
         print('Epoch', str(i+1), 'Train loss:', train_loss, "Train acc", train_acc)
 
         # Validation  (Error code)
-        if  (i+1) % 5:
+        if  (i+1) % 5 == 0:
             val_acc, val_loss = validate_model(
                 model, SEM_val_load, criterion, i+1, True, image_save_path)
             print('Val loss:', val_loss, "val acc:", val_acc)
