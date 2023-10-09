@@ -59,14 +59,22 @@ def validate_model(model, data_val, criterion, epoch, make_prediction=True, save
     # calculating validation loss
     total_val_loss = 0
     total_val_acc = 0
+    b = 0
     for batch, (images_v, masks_v, original_msk) in enumerate(data_val):
+        if b == 0:
+            print('*** images_v', images_v.shape)
         stacked_img = torch.Tensor([]).cuda()
         for index in range(images_v.size()[1]):
             with torch.no_grad():
                 image_v = Variable(images_v[:, index, :, :].unsqueeze(0).cuda())
                 mask_v = Variable(masks_v[:, index, :, :].squeeze(1).cuda())
                 # print(image_v.shape, mask_v.shape)
-                print('val image_v', image_v.shape)
+                if b == 0: 
+                    print('image_v', image_v.shape, mask_v.shape)
+                    print('mask_v', mask_v.shape)
+                    print('output_v', output_v.shape)
+                    print()
+                    b = 1
                 output_v = model(image_v)
                 total_val_loss = total_val_loss + criterion(output_v, mask_v).cpu().item()
                 # print('out', output_v.shape)
