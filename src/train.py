@@ -34,7 +34,7 @@ def run(model, num_epochs):
                                     num_workers=2, batch_size=2, shuffle=True) # ワーカー数をColab用に設定
     SEM_val_load = \
         torch.utils.data.DataLoader(dataset=SEM_val,
-                                    num_workers=2, batch_size=2, shuffle=True)
+                                    num_workers=2, batch_size=1, shuffle=True)
 
     SEM_test_load = \
         torch.utils.data.DataLoader(dataset=SEM_test,
