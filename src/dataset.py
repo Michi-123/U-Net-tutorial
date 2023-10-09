@@ -196,7 +196,7 @@ class SEMDataVal(Dataset):
 
         # msk_as_np = np.expand_dims(msk_as_np, axis=0)  # add additional dimension
         msk_as_tensor = torch.from_numpy(msk_as_np).long()  # Convert numpy array to tensor
-        original_msk = torch.from_numpy(np.asarray(msk_as_img))
+        original_msk = torch.from_numpy(np.array(msk_as_img))
         return (img_as_tensor, msk_as_tensor, original_msk)
 
     def __len__(self):
